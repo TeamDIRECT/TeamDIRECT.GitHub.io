@@ -105,20 +105,21 @@ function setup3dhop() {
 			"mesh_1" : { url: "models/pescara_c.nxs" }
 		},
 		modelInstances : {
-			"model_1" : { 
+			"model_1" : {
 				mesh  : "mesh_1",
-				color : [0.8, 0.7, 0.75]
+        transform: { matrix: SglMat4.rotationAngleAxis(sglDegToRad(-90.0), [1.0, 0.0, 0.0]) },
+        color : [0.8, 0.7, 0.75]
 			}
 		},
 		trackball: {
 			type : TurntablePanTrackball,
 			trackOptions : {
-				startPhi: 35.0,
-				startTheta: 15.0,
-				startDistance: 2.5,
+				startPhi: 40.0,
+				startTheta: 90.0,
+				startDistance: 2.0,
 				minMaxPhi: [-180, 180],
-				minMaxTheta: [-30.0, 70.0],
-				minMaxDist: [0.5, 3.0]
+				minMaxTheta: [0, 90.0],
+				minMaxDist: [0.15, 3.0]
 			}
 		}
 	});
@@ -166,19 +167,19 @@ function actionsToolbar(action) {
 function onEndMeasure(measure) {
 	// measure.toFixed(2) sets the number of decimals when displaying the measure
 	// depending on the model measure units, use "mm","m","km" or whatever you have
-	$('#measure-output').html(measure.toFixed(2) + "mm"); 
+	$('#measure-output').html(measure.toFixed(2) + "m");
 }
 //--MEASURE--
 
 //--PICKPOINT--
 function onEndPick(point) {
-	// .toFixed(2) sets the number of decimals when displaying the picked point	
+	// .toFixed(2) sets the number of decimals when displaying the picked point
 	var x = point[0].toFixed(2);
 	var y = point[1].toFixed(2);
 	var z = point[2].toFixed(2);
     $('#pickpoint-output').html("[ "+x+" , "+y+" , "+z+" ]");
-} 
-//--PICKPOINT--	
+}
+//--PICKPOINT--
 
 $(document).ready(function(){
 	init3dhop();
